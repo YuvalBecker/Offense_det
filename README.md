@@ -35,4 +35,5 @@ train.py
 0.2
 ``` 
 ![alt text](https://github.com/YuvalBecker/Offense_det/blob/main/model_arch.png)
+
 Figure 1, Our suggested architecture 

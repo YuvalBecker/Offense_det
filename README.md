@@ -26,6 +26,8 @@ False
 ``` 
 The model class is : 
 **Paper_recon** which is in models\project_models.py
+In this configuration we use XLM-R model and it's custom tokenizer.
+
 In order to run our innovative model, run the following configuration: 
 ```
 train.py 

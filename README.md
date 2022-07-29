@@ -18,6 +18,8 @@ train.py
 0.2
 0.2
 ``` 
+The model class is : 
+**Paper_recon** which is in models\project_models.py
 In order to run our innovative model, run the following configuration: 
 ```
 train.py 
@@ -33,7 +35,10 @@ train.py
 0.6
 0.2
 0.2
-``` 
+```  
+The model class is :  
+**ODF** which is in models\project_models.py
+
 ![alt text](https://github.com/YuvalBecker/Offense_det/blob/main/model_arch.png)
 
 Figure 1, Our suggested architecture 

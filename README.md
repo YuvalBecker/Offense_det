@@ -2,6 +2,8 @@
 Offense detection code.
 
 How to run:
+
+
 In order to replicate anchor paper results, run the following configuration: 
 ```
 train.py 

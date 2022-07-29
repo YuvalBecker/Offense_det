@@ -86,6 +86,6 @@ Add the additional fields:
 ```
 This command, every three epochs updated the training dataset by collecting the most difficult samples for our current model on-going trained model. 
 
-This command calls to **hard_collection** which is in \data.py 
+This command calls to **hard_collection** function which is in \data.py 
 
 

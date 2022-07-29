@@ -1,16 +1,16 @@
 import os
 import numpy as np
 from torch.utils.data import DataLoader
-from multi_task_offensive_language_detection.data import task_a, task_b, task_c, all_tasks, read_test_file, read_test_file_all
-from multi_task_offensive_language_detection.config import OLID_PATH
-from multi_task_offensive_language_detection.cli import get_args
-from multi_task_offensive_language_detection.utils import load
-from multi_task_offensive_language_detection.datasets import HuggingfaceDataset, HuggingfaceMTDataset, ImbalancedDatasetSampler
-from multi_task_offensive_language_detection.models.bert import BERT, RoBERTa
-from multi_task_offensive_language_detection.models.gated import GatedModel
-from multi_task_offensive_language_detection.models.project_models import ODF, ODF2, MTL_Transformer_LSTM2, Paper_recon
+from Offense_det.data import task_a, task_b, task_c, all_tasks, read_test_file, read_test_file_all
+from Offense_det.config import OLID_PATH
+from Offense_det.cli import get_args
+from Offense_det.utils import load
+from Offense_det.datasets import HuggingfaceDataset, HuggingfaceMTDataset, ImbalancedDatasetSampler
+from Offense_det.models.bert import BERT, RoBERTa
+from Offense_det.models.gated import GatedModel
+from Offense_det.models.project_models import ODF, ODF2, MTL_Transformer_LSTM2, Paper_recon
 from transformers import BertTokenizer, RobertaTokenizer, get_cosine_schedule_with_warmup
-from multi_task_offensive_language_detection.trainer import Trainer
+from Offense_det.trainer import Trainer
 from transformers import XLMTokenizer
 from sentence_transformers import SentenceTransformer
 import wandb
@@ -32,7 +32,10 @@ if __name__ == '__main__':
     bs = args['batch_size']
     patience = args['patience']
     seed = args['seed']
-   ##############################################################################################
+    hard_mine = args['hard_mine']
+    hard_mine_freq = args['hard_mine_freq']
+
+##############################################################################################
     torch.manual_seed(seed)
     np.random.seed(seed)
     sentence_transformer =  SentenceTransformer('paraphrase-MiniLM-L6-v2')
@@ -151,8 +154,12 @@ if __name__ == '__main__':
         patience=patience,
         task_name=task,
         model_name=model_name,
-        seed=args['seed']
-    )
+        seed=args['seed'],
+        hard_mine = args['hard_mine'],
+        hard_mine_freq = args['hard_mine_freq'],
+       balance  = args['balancer'],
+       data_balancer_freq  = args['balancer_freq']
+   )
 
     if task in ['a', 'b', 'c']:
         trainer.train()

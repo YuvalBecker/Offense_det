@@ -19,6 +19,10 @@ def get_args():
     parser.add_argument('-lw', '--loss-weights', help='Weights for all losses', nargs='+', type=float, required=False, default=[1, 1, 1, 1])
     parser.add_argument('-sc', '--scheduler', help='Use scheduler to optimizer', action='store_true')
     parser.add_argument('-se', '--seed', help='Random seed', type=int, required=False, default=19951126)
+    parser.add_argument('-hm', '--hard_mine', help='Random seed', type=bool, required=False, default=False)
+    parser.add_argument('-hmf', '--hard_mine_freq', help='Random seed', type=int, required=False, default=3)
+    parser.add_argument('-b', '--balance', help='use balanced dataset', type=int, required=False, default=False)
+    parser.add_argument('-bp', '--balancer_percent', help='freq to balance every epoch', required=False, type=int, default=0.7)
 
     parser.add_argument('--ckpt', type=str, required=False, default='')
 

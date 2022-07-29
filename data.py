@@ -3,8 +3,8 @@ import pandas as pd
 import numpy as np
 import emoji
 import wordsegment
-from multi_task_offensive_language_detection.config import OLID_PATH
-from multi_task_offensive_language_detection.utils import pad_sents, get_mask, get_lens
+from Offense_det.config import OLID_PATH
+from Offense_det.utils import pad_sents, get_mask, get_lens
 
 wordsegment.load()
 from sentence_transformers import SentenceTransformer

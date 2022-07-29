@@ -10,8 +10,8 @@ from torch.utils.data import DataLoader
 from sklearn.metrics import f1_score
 from tqdm import tqdm
 # Local files
-from multi_task_offensive_language_detection.utils import save
-from multi_task_offensive_language_detection.config import LABEL_DICT
+from Offense_det.utils import save
+from Offense_det.config import LABEL_DICT
 
 import wandb
 class Trainer():
@@ -34,7 +34,11 @@ class Trainer():
         patience: int,
         task_name: str,
         model_name: str,
-        seed: int
+        seed: int,
+        hard_mine : bool,
+        hard_mine_freq : int,
+        balance : bool,
+        data_balancer_freq : int
     ):
         self.model = model
         self.epochs = epochs
@@ -50,8 +54,11 @@ class Trainer():
         self.model_name = model_name
         self.seed = seed
         self.datetimestr = datetime.datetime.now().strftime('%Y-%b-%d_%H:%M:%S')
-
-        # Evaluation results
+        self.hard_mine = hard_mine
+        self.hard_mine_freq = hard_mine_freq
+        self.balance = balance
+        self.data_balancer_freq = data_balancer_freq
+    # Evaluation results
         self.train_losses = []
         self.test_losses = []
         self.train_f1 = []
@@ -127,8 +134,9 @@ class Trainer():
             print(f'Epoch {epoch}')
             print('=' * 20)
             dataloader = self.dataloaders['train']
-            #if np.mod(epoch, 3): ## Refresh hard samples.
-            #    dataloader.dataset.hard_collection(percent_hard = 10)
+            if self.hard_mine:
+                if np.mod(epoch, self.hard_mine_freq): ## Refresh hard samples.
+                    dataloader.dataset.hard_collection(percent_hard = 10)
 
             self.train_one_epoch_m(dataloader,epoch=epoch)
             self.test_m(epoch=epoch)
@@ -232,7 +240,7 @@ class Trainer():
                 b_all_logits_non_null = all_logits[1][Non_null_index_B]
                 c_all_logits_non_null = all_logits[2][Non_null_index_C]
 
-                if np.random.rand() > 1.1:
+                if self.balance and np.random.rand() > self.data_balancer_percent:
                     idx_a, idx_b = self.data_balancer(label_A,Non_null_label_B )
                     _loss_a = self.loss_weights[0] * torch.mean(self.criterion(a_all_logits[idx_a], label_A[idx_a]))
                     #print(b_all_logits_non_null)

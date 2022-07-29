@@ -1,6 +1,6 @@
 import torch
 from torch.utils.data import Dataset
-from multi_task_offensive_language_detection.config import LABEL_DICT
+from Offense_det.config import LABEL_DICT
 import numpy as np
 from collections import defaultdict
 class HuggingfaceDataset(Dataset):

@@ -98,3 +98,6 @@ This command, every three epochs updated the training dataset by collecting the 
 This command calls to **hard_collection** function which is in \data.py 
 
 
+
+** Several modules derived from this repo:
+https://github.com/wenliangdai/multi-task-offensive-language-detection

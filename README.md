@@ -1,8 +1,10 @@
 # Offense_det
-Offense detection code.
+Text offense detection code.
+
+Visit https://competitions.codalab.org/competitions/20011#learn_the_details-overview for further information.
+
 
 How to run:
-
 
 In order to replicate anchor paper results, run the following configuration: 
 ```

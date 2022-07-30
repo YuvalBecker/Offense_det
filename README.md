@@ -1,8 +1,13 @@
 # Offense_det
-Text offense detection code.
+Text offense detection code. 
+There are three different offense tasks to classify.
 
 Visit https://competitions.codalab.org/competitions/20011#learn_the_details-overview for further information.
 
+
+**Main contributions**
+1. Adaptive cyclic hard mining mechanism 
+2. Task conditional architecture
 
 How to run:
 
